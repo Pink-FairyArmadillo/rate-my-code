@@ -3,9 +3,7 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-  entry: [
-    './client/index.js'
-  ],
+  entry: ['./client/index.js'],
   output: {
     path: path.resolve(__dirname, 'dist'),
     publicPath: '/',
@@ -15,7 +13,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.jsx?/, 
+        test: /\.jsx?/,
         exclude: /node_modules/,
         use: {
           loader: 'babel-loader',
@@ -26,9 +24,13 @@ module.exports = {
       },
       {
         test: /\.s?[ac]ss$/i,
-        use: ['style-loader','css-loader','sass-loader']
+        use: ['style-loader', 'css-loader', 'sass-loader'],
       },
-    ]
+      {
+        test: /\.svg$/,
+        use: ['@svgr/webpack'],
+      },
+    ],
   },
   devServer: {
     publicPath: '/',
@@ -39,7 +41,5 @@ module.exports = {
       '/login': 'http://localhost:3000/',
     },
   },
-  plugins: [
-    new HtmlWebpackPlugin({ template: './client/index.html' })
-  ]
+  plugins: [new HtmlWebpackPlugin({ template: './client/index.html' })],
 };
