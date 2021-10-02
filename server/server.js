@@ -28,7 +28,7 @@ const reactRouterPaths = ['/postview', '/feed', '/createPost', '/landing'];
 // Have our server(app) check for the react routes and serve our static files
 app.use(reactRouterPaths, (req, res) => {
   res.sendFile(path.resolve(__dirname, '../dist/index.html'));
-})
+});
 
 // Global 404 catch for bad route requests
 app.use((req, res, next) => {

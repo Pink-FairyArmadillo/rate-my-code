@@ -2,6 +2,7 @@ import React from 'react';
 import { Switch, Route, Link } from 'react-router-dom';
 import MainContainer from './containers/MainContainer.jsx';
 import Feed from './components/Feed.jsx';
+import FeedCodeBlock from './components/FeedCodeBlock.jsx'; //delete when we can fetch from database
 
 export default function App(props) {
   return (
@@ -14,6 +15,7 @@ export default function App(props) {
         <Route path="/createpost"></Route>
         <Route path="/feed">
           <Feed />
+          <FeedCodeBlock /> {/* //delete when we can fetch from database */}
         </Route>
       </Switch>
     </div>
