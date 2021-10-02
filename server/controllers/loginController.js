@@ -1,0 +1,84 @@
+// TODO: import DB models
+
+const loginController = {};
+
+/*Get user specified in req.body in getUser store in res.locals.user */
+loginController.getUser = (req, res, next) => {
+  const { username } = req.body.user;
+
+  // Construct a DB query for username
+  const query = {
+    text: `
+      SELECT *
+      FROM user
+      WHERE username = $1
+    `,
+    params: [username]
+  }
+  
+  // Query our DB to find username store result in res.locals.user
+  db.query(query.text, query.params, (err, dbResponse) => {
+    if(err) {
+      next({
+        log: 'ERROR: loginController.getUser',
+        message: { err: err.message }
+      });
+    }
+    res.locals.user = dbResponse.rows[0];
+    return next();
+  });
+};
+
+/*
+  In verifyUser middleware, if we have a user in res.locals.user, verify password matches
+    If there is no user with that name or the password does not match, return a message 
+    and remove user from res.locals to avoid passing client user information
+*/
+loginController.verifyUser = (req, res, next) => {
+  if(!res.locals.user) {  
+    return next(); 
+  } 
+
+  const { password } = req.body.user;
+
+  if(password !== res.locals.user.password) {
+    delete res.locals.user;
+  }
+  
+  return next();
+};
+
+/* 
+  Check if a user was found in createUser:
+  If user found, remove user from res.locals and move on
+  If user not found, create user in database, store new user in res.locals.user and move on
+*/     
+loginController.createUser = (req, res, next) => {
+  if(res.locals.user) {
+    delete res.locals.user;
+    return next();
+  }
+
+  const { username, password } = req.body.user;
+
+  const query = {
+    text: `
+      INSERT INTO user (username, password)
+      VALUES ($1, $2)
+    `,
+    params: [username, password]
+  }
+
+  db.query(query.text, query.params, (err, dbResponse) => {
+    if(err) {
+      next({
+        log: 'ERROR: loginController.createUser',
+        message: { err: err.message }
+      });
+    }
+    res.locals.user = dbResponse.rows[0];
+    return next();
+  });
+};
+
+module.exports = loginController;
