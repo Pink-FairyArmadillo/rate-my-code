@@ -3,7 +3,7 @@ const path = require('path');
 const express = require('express');
 
 // TODO: Require Routers
-
+const loginRouter = require('./routes/login');
 
 // Initialize Express Server
 const app = express();
@@ -20,6 +20,7 @@ app.use(express.static(path.resolve(__dirname, '../dist/index.html')));
 app.use(express.static(path.resolve(__dirname, '../dist')));
 
 // TODO: Direct to Routers
+app.use('/login', loginRouter);
 
 
 /* Handle Client Side React-Router Routes */
