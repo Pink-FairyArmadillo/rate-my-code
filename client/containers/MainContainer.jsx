@@ -1,7 +1,8 @@
 import React from 'react';
-import { ProSidebar, Menu, MenuItem, SubMenu } from 'react-pro-sidebar';
+import { ProSidebar, Menu, MenuItem } from 'react-pro-sidebar';
 import 'react-pro-sidebar/dist/css/styles.css';
 import { Link } from 'react-router-dom';
+import CreatePost from '../components/CreatePost.jsx';
 
 export default function MainContainer() {
   return (
@@ -37,5 +38,7 @@ export default function MainContainer() {
     </div>
   );
 }
+
+
 
 //@import '~react-pro-sidebar/dist/scss/styles.scss'; for styles.scss

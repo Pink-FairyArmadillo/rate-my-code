@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 
 import classes from './FeedCodeBlock.module.css';
 
+// code block component. Routes to postview when clicked
 export default function Feed() {
   return (
     <section>
