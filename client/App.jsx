@@ -4,7 +4,6 @@ import MainContainer from './containers/MainContainer.jsx';
 import Feed from './components/Feed.jsx';
 import FeedCodeBlock from './components/FeedCodeBlock.jsx'; //delete when we can fetch from database
 import LogInContainer from './containers/LogInContainer.jsx';
-
 export default function App(props) {
   return (
     <div>

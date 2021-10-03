@@ -1,6 +1,10 @@
 import React, { useState, useRef } from 'react';
 import { Redirect, useHistory } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import Button from '@mui/material/Button';
+import Container from '@mui/material/Container';
+
+import classes from './LogInContainer.module.css';
 
 export default function LogInContainer() {
   const [verified, setVerified] = useState(false);
@@ -74,37 +78,49 @@ export default function LogInContainer() {
   }
 
   return (
-    <section>
-      {/* temp bar to delete after development */}
-      <header>
-        TEMP NAV BAR:
-        <Link to="/feed">Feed</Link>
-        <Link to="/postview">Post View</Link>
-        <Link to="/createpost">Create Post</Link>
-      </header>
-      <h1>Rate-My-Code</h1>
-      <form>
-        <div>
-          <label htmlFor="username">Username</label>
-          <input
-            type="text"
-            required
-            id="username"
-            ref={usernameInputRef}
-          ></input>
-        </div>
-        <div>
-          <label htmlFor="password">Password</label>
-          <input
-            type="password"
-            required
-            id="password"
-            ref={passwordInputRef}
-          ></input>
-        </div>
-        <button onClick={login}>Login</button>
-        <button onClick={signup}>Signup</button>
-      </form>
-    </section>
+    <Container className={classes.mainContainer}>
+      <Container className={classes.insideContainer}>
+        {/* temp bar to delete after development */}
+        <header>
+          TEMP NAV BAR: <br />
+          <Link to="/feed">Feed</Link>
+          <br />
+          <Link to="/postview">Post View</Link>
+          <br />
+          <Link to="/createpost">Create Post</Link>
+        </header>
+        <h1>Rate-My-Code</h1>
+        <form>
+          <div className={classes.inputContainer}>
+            <label htmlFor="username">Username </label>
+            <input
+              type="text"
+              required
+              id="username"
+              ref={usernameInputRef}
+            ></input>
+          </div>
+          <div className={classes.inputContainer}>
+            <label htmlFor="password">Password </label>
+            <input
+              type="password"
+              required
+              id="password"
+              ref={passwordInputRef}
+            ></input>
+          </div>
+          <div className={classes.buttonContainer}>
+            <Button variant="contained" onClick={login}>
+              Login
+            </Button>
+          </div>
+          <div className={classes.buttonContainer}>
+            <Button variant="outlined" onClick={signup}>
+              Signup
+            </Button>
+          </div>
+        </form>
+      </Container>
+    </Container>
   );
 }
