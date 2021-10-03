@@ -2,11 +2,16 @@ import React from 'react';
 import { ProSidebar, Menu, MenuItem, SubMenu } from 'react-pro-sidebar';
 import 'react-pro-sidebar/dist/css/styles.css';
 import { Link } from 'react-router-dom';
+import Container from '@mui/material/Container';
+import FeedCodeBlock from '../components/FeedCodeBlock.jsx';
+
+import classes from './MainContainer.module.css';
+import './custom.scss';
 
 export default function MainContainer() {
   return (
-    <div>
-      <ProSidebar>
+    <Container className={classes.mainContainer}>
+      <ProSidebar className={classes.sidebar}>
         <Menu iconShape="square">
           <MenuItem>
             <Link to="/feed">Home</Link>
@@ -19,6 +24,15 @@ export default function MainContainer() {
           <MenuItem>PHP</MenuItem>
         </Menu>
       </ProSidebar>
+      {/* we may need to import other components below */}
+      {/* <main className={classes.codeBlockContainer}>
+        <FeedCodeBlock />
+        <FeedCodeBlock />
+        <FeedCodeBlock />
+        <FeedCodeBlock />
+        <FeedCodeBlock />
+        <FeedCodeBlock />
+      </main> */}
       <div>
         <Link to="/createpost">
           <svg
@@ -34,7 +48,7 @@ export default function MainContainer() {
           </svg>
         </Link>
       </div>
-    </div>
+    </Container>
   );
 }
 
