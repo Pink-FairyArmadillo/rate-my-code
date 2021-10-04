@@ -46,16 +46,20 @@
   },
   "dependencies": {
     "@emotion/core": "^10.1.1",
+    "bootstrap": "^5.1.1",
     "cookie-parser": "^1.4.5",
     "eslint": "^7.32.0",
     "eslint-plugin-react": "^7.26.1",
     "express": "^4.17.1",
     "node-fetch": "^3.0.0",
+    "node-sass": "^6.0.1",
     "pg": "^8.7.1",
     "postgres": "^1.0.2",
     "react": "^17.0.2",
+    "react-bootstrap": "^2.0.0-rc.0",
     "react-dom": "^17.0.2",
     "react-pro-sidebar": "^0.7.1",
+    "react-router-bootstrap": "^0.25.0",
     "react-router-dom": "^5.3.0"
   }
 }

@@ -1,0 +1,8 @@
+.codeBlock {
+  border: solid black 1px;
+  width: 250px;
+  height: 300px;
+  color: black;
+  text-decoration: none;
+  margin-bottom: 2em;
+}
