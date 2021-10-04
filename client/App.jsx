@@ -3,6 +3,8 @@ import { Switch, Route, Link } from 'react-router-dom';
 import MainContainer from './containers/MainContainer.jsx';
 import Feed from './components/Feed.jsx';
 import FeedCodeBlock from './components/FeedCodeBlock.jsx'; //delete when we can fetch from database
+import CreatePost from './components/CreatePost.jsx';
+
 import LogInContainer from './containers/LogInContainer.jsx';
 export default function App(props) {
   return (
@@ -13,7 +15,9 @@ export default function App(props) {
           <LogInContainer />
         </Route>
         <Route path="/postview"></Route>
-        <Route path="/createpost"></Route>
+        <Route path="/createpost">
+          <CreatePost />
+        </Route>
         <Route path="/feed">
           <Feed />
           <FeedCodeBlock /> {/* //delete when we can fetch from database */}
@@ -21,6 +25,7 @@ export default function App(props) {
       </Switch>
     </div>
   );
+
 }
 
 // const App = props => {

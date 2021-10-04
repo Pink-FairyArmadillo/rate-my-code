@@ -1,7 +1,8 @@
 import React from 'react';
-import { ProSidebar, Menu, MenuItem, SubMenu } from 'react-pro-sidebar';
+import { ProSidebar, Menu, MenuItem } from 'react-pro-sidebar';
 import 'react-pro-sidebar/dist/css/styles.css';
 import { Link } from 'react-router-dom';
+import CreatePost from '../components/CreatePost.jsx';
 import Container from '@mui/material/Container';
 import FeedCodeBlock from '../components/FeedCodeBlock.jsx';
 
@@ -51,5 +52,7 @@ export default function MainContainer() {
     </Container>
   );
 }
+
+
 
 //@import '~react-pro-sidebar/dist/scss/styles.scss'; for styles.scss
