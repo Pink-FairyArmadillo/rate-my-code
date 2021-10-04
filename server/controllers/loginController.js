@@ -5,18 +5,17 @@ const loginController = {};
 
 /*Get user specified in req.body in getUser store in res.locals.user */
 loginController.getUser = (req, res, next) => {
-  console.log('loginController.getUser: checking for user ', username);
-  const username = req.body.user;
+  const { username } = req.body;
   // Construct a DB query for username
   const query = {
     text: `
-      SELECT *
-      FROM user
-      WHERE username = $1
+    SELECT *
+    FROM users
+    WHERE username = $1;
     `,
     params: [username]
   };
-  
+
   // Query our DB o find username store result in res.locals.user
   db.query(query.text, query.params, (err, dbResponse) => {
     if(err) {
@@ -25,7 +24,7 @@ loginController.getUser = (req, res, next) => {
         message: { err: err.message }
       });
     }
-    res.locals.user = dbResponse.rows[0];
+    if(dbResponse.rows[0])  res.locals.user = dbResponse.rows[0];
     return next();
   });
 };
@@ -40,8 +39,7 @@ loginController.verifyUser = (req, res, next) => {
     return next(); 
   } 
 
-  const password = req.body.user;
-  console.log('loginController.verifyUser: checking password for ', req.body.user);
+  const { password } = req.body;
   if(password !== res.locals.user.password) {
     delete res.locals.user;
   }
@@ -59,13 +57,13 @@ loginController.createUser = (req, res, next) => {
     delete res.locals.user;
     return next();
   }
-  console.log('loginController.createUser: creating user ', req.body.user);
-  const { username, password } = req.body.user;
+  const { username, password } = req.body;
 
   const query = {
     text: `
-      INSERT INTO user (username, password)
+      INSERT INTO users (username, password)
       VALUES ($1, $2)
+      RETURNING _id;
     `,
     params: [username, password]
   };
@@ -90,7 +88,6 @@ loginController.setCookie = (req, res, next) => {
 
   // Set a cookie equal to the user's _id primary key
   res.cookie('userID', userID);
-
   // Move on
   return next();
 };

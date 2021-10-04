@@ -3,12 +3,12 @@ import React, { useState } from 'react';
 import MainContainer from '../containers/MainContainer.jsx';
 import FeedCodeBlock from './FeedCodeBlock.jsx';
 
-export default function Feed() {
+export default function Feed(props) {
   // React hooks for state - store the data from the database
   const [codeBlocks, setCodeBlocks] = useState([]);
 
   // update state that we fetch
-  fetch('/api')
+  fetch(`/api/getTopic/${props.topic}`)
     .then((res) => res.json())
     .then((data) => {
       setCodeBlocks(data);
@@ -16,15 +16,13 @@ export default function Feed() {
     .catch((err) => console.log(err));
 
   // create codeblock components and save them in an array
-  const codeBlockEl = codeBlocks.map((code, i) => {
-    return <FeedCodeBlock key={i} info={code} />;
+  const codeBlockEl = codeBlocks.map(post => {
+    return <FeedCodeBlock key={post._id} code={post.code} />;
   });
 
   // returns code block cards
   return (
     <div>
-      {/* <MainContainer /> */}
-      <FeedCodeBlock />
       <div>{codeBlockEl}</div>
     </div>
   );

@@ -10,12 +10,8 @@ export default function Feed(props) {
       <Link to={`/home/postview/`}>
         <div className={classes.codeBlock}>
           <div>
-            Code: Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-            Ullam eligendi dolore harum, recusandae voluptate officia dolorum
-            voluptas magnam quidem laudantium magni. Exercitationem doloremque
-            at modi provident, officia dignissimos commodi excepturi?
+            {props.code}
           </div>
-          <div>Username</div>
         </div>
       </Link>
     </section>

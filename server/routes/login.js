@@ -25,7 +25,7 @@ router.post('/createUser',
     if (!res.locals.user) {
       res.status(400).json({ message: 'Could not create user' });
     }
-    res.status(200).redirect('/home');
+    res.status(200).json({userID: res.locals.user._id});
   });
 
 // Handle request to / for loging in a user
@@ -40,11 +40,11 @@ router.post('/',
   loginController.getUser,
   loginController.verifyUser,
   loginController.setCookie,
-  (req, res) => {
+  (req, res, next) => {
     if (!res.locals.user) {
       res.status(400).json({ message: 'Could not verify login credentials' });
     }
-    res.status(200).redirect('/home');
+    res.status(200).json({userID: res.locals.user._id});
   });
 
 // export as router

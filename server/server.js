@@ -1,6 +1,7 @@
 // Require Packages
 const path = require('path');
 const express = require('express');
+const cookieParser = require('cookie-parser');
 
 // Require Routers
 const loginRouter = require('./routes/login');
@@ -13,6 +14,7 @@ const PORT = 3000;
 // Insert global parsers
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
 
 // Serve Static Files
 app.use(express.static(path.resolve(__dirname, '../dist/index.html')));

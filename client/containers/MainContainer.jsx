@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Switch, Route, Link } from 'react-router-dom';
 import { ProSidebar, Menu, MenuItem } from 'react-pro-sidebar';
 
@@ -13,6 +13,9 @@ import classes from './MainContainer.module.css';
 import './custom.scss';
 
 export default function MainContainer() {
+
+  const [topic, setTopic] = useState('Java');
+
   return (
     <Container className={classes.mainContainer}>
       <ProSidebar className={classes.sidebar}>
@@ -23,12 +26,12 @@ export default function MainContainer() {
           <MenuItem>
             <Link to="/home/feed">Feed</Link>
           </MenuItem>
-          <MenuItem>JavaScript</MenuItem>
-          <MenuItem>Python</MenuItem>
-          <MenuItem>C#</MenuItem>
-          <MenuItem>C++</MenuItem>
-          <MenuItem>Java</MenuItem>
-          <MenuItem>PHP</MenuItem>
+          <MenuItem><Link to="/home/JavaScript">JavaScript</Link></MenuItem>
+          <MenuItem><Link to="/home/Python">Python</Link></MenuItem>
+          <MenuItem><Link to="/home/C#">C#</Link></MenuItem>
+          <MenuItem><Link to="/home/C++">C++</Link></MenuItem>
+          <MenuItem><Link to="/home/Java">Java</Link></MenuItem>
+          <MenuItem><Link to="/home/PHP">PHP</Link></MenuItem>
         </Menu>
       </ProSidebar>
       {/* we may need to import other components below */}
@@ -40,7 +43,7 @@ export default function MainContainer() {
           <CreatePost />
         </Route>
         <Route path="/home/feed">
-          <Feed />
+          <Feed topic={topic} />
           {/* <FeedCodeBlock /> */}
         </Route>
       </Switch>
