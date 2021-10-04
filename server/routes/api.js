@@ -43,9 +43,9 @@ app.post('/editPost', apiController.editPost, (req, res) => {
     postID: whatever the post _id is 
   }
 */
-app.post('/getVotes', apiController.getVotes, (req, res) => {
-  res.status(200).json(res.locals.votes);
-});
+// app.post('/votes', apiController.Votes, (req, res) => {
+//   res.status(200).json(res.locals.votes);
+// });
 
 // Handle POST request to /createComment 
 app.post('/createComment', apiController.createComment, (req, res) => {

@@ -1,9 +1,10 @@
 // TODO: import DB models
+const db = require('../models/models');
 
 const apiController = {};
 
 apiController.getTopic = (req, res, next) => {
-  const { topicID } = req.body.topic; 
+  const { topic } = req.body.topic; 
 
   const query = {
     text: `
@@ -11,13 +12,13 @@ apiController.getTopic = (req, res, next) => {
       FROM posts
       WHERE topic = $1
     `,
-    params: [topicID]
+    params: [topic]
   };
 
   db.query(query.text, query.params, (err, dbResponse) => {
     if(err) {
       next({
-        log: 'ERROR: apiController.getTopioc',
+        log: 'ERROR: apiController.getTopic',
         message: { err: err.message }
       });
     }
@@ -57,7 +58,12 @@ apiController.getComments = (req, res, next) => {
 
   // get comments from comments table using foreign key of correct post
   const query = {
-    text: '',
+    text: `
+      SELECT * 
+      FROM comments
+      LEFT JOIN posts
+      WHERE comments.post_id = posts.$1
+    `,
     params: [id]
   };
 
@@ -76,45 +82,45 @@ apiController.getComments = (req, res, next) => {
 
 apiController.createPost = (req, res, next) => {
   const { 
-      title, 
-      issue, 
-      tried, 
-      cause, 
-      code, 
-      topic,  
+      topic,
       date,
-      user,
       upvotes,
-      downvotes
+      downvotes,
+      title,
+      issue,
+      tried,
+      cause,
+      code,
+      user_id
     } = req.body.createPost;
 
   const query = {
     text: `
       INSERT INTO posts (
-        title,
-        issue,
-        tried, 
-        cause,
-        code,
         topic,
         date,
-        user,
         upvotes,
-        downvotes
+        downvotes,
+        title,
+        issue,
+        tried,
+        cause,
+        code,
+        user_id
       )
-      VALUES ($1, $2, $3, $4, $5, $6, $7, $8, 0, 0)
+      VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
     `,
     params: [
-      title, 
-      issue, 
-      tried, 
-      cause, 
-      code, 
-      topic,  
+      topic,
       date,
-      user,
       upvotes,
-      downvotes
+      downvotes,
+      title,
+      issue,
+      tried,
+      cause,
+      code,
+      user_id
     ]
   }
 
@@ -133,46 +139,44 @@ apiController.createPost = (req, res, next) => {
 
 apiController.editPost = (req, res, next) => {
     const { 
-        title, 
-        issue, 
-        tried, 
-        cause, 
-        code, 
-        topic,  
+        id,
+        topic,
         date,
-        user,
         upvotes,
         downvotes,
-        id
+        title,
+        issue,
+        tried,
+        cause,
+        code,
+        user_id
       } = req.body.editPost;
   
     const query = {
       text: `
         UPDATE posts
         SET 
-          title = $1,
-          issue = $2,
-          tried = $3, 
-          cause, = $4
-          code = $5,
-          topic = $6,
-          date = $7,
-          user = $8,
-          upvotes = $9,
-          downvotes = $10
-        WHERE id = $11
+          topic = $1,
+          date = $2,
+          upvotes = $3,
+          downvotes = $4,
+          title = $5,
+          issue = $6,
+          tried = $7,
+          cause = $8,
+          code = $9,
+        WHERE id = $10
       `,
       params: [
-        title, 
-        issue, 
-        tried, 
-        cause, 
-        code, 
-        topic,  
+        topic,
         date,
-        user,
         upvotes,
         downvotes,
+        title,
+        issue,
+        tried,
+        cause,
+        code,
         id
       ]
     }
@@ -191,7 +195,7 @@ apiController.editPost = (req, res, next) => {
 };
 
 apiController.getVotes = (req, res, next) => {
-
+ //
 };
 
 apiController.createComment = (req, res, next) => {
@@ -201,8 +205,8 @@ apiController.createComment = (req, res, next) => {
     upvotes,
     downvotes,
     date,
-    post,
-    user
+    post_id,
+    user_id
   } = req.body.createComment;
   
   const query = {
@@ -213,8 +217,8 @@ apiController.createComment = (req, res, next) => {
         upvotes,
         downvotes,
         date,
-        post,
-        user
+        post_id,
+        user_id
       )
       VALUES ($1, $2, $3, $4, $5, $6, $7)
     `,
@@ -224,8 +228,8 @@ apiController.createComment = (req, res, next) => {
       upvotes,
       downvotes,
       date,
-      post,
-      user
+      post_id,
+      user_id
     ]
   }
 
