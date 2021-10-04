@@ -23,9 +23,9 @@ export default function CreatePost() {
     </div>
   );
 
+  // remove MainContainer when we implement React Router
   return (
     <div>
-      <MainContainer />
       <div><DeleteOutlinedIcon /></div>
       <div>
         <TextField id="title" label="Title" variant="outlined" />
