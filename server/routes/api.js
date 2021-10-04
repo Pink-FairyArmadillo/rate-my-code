@@ -11,7 +11,7 @@ const router = express.Router();
 // Receive a topicID the req.body
 // Use getTopic to retrieve the requested topicID and store in res.locals.topic
 // Return the res.locals.topic as json data
-app.post('/getTopic', apiController.getTopic, (req, res) => {
+router.get('/getTopic/:topic', apiController.getTopic, (req, res) => {
   if(!res.locals.topic) {
     res.status(200).json({message: 'No posts have been created'});
   }
@@ -19,18 +19,28 @@ app.post('/getTopic', apiController.getTopic, (req, res) => {
 });
 
 // Handle POST request to /getPost
-app.post('/getPost', apiController.getPost, apiController.getComments, (req, res) => {
-    res.status(200).json(res.locals.getPost);
+// Return an object: {post: {postContent: {_id, topic, date, ...}, comments: []}}
+router.get('/getPost/:id', apiController.getPost, apiController.getComments, (req, res) => {
+  if(!res.locals.post) {
+    res.status(500).json({message: 'No post found with that information.'});
+  }  
+  res.status(200).json(res.locals.post);
 });
 
 // Handle POST request to /createPost  
-app.post('/createPost', apiController.createPost, (req, res) => {
-  res.status(200).json(res.locals.createPost);
+router.post('/createPost', apiController.createPost, (req, res) => {
+  if(!res.locals.createdPost) {
+    res.status(500).json({message: 'Something went wrong creating your post.'});
+  }
+  res.status(200).json(res.locals.createdPost);
 });
 
 // Handle POST request to /editPost
-app.post('/editPost', apiController.editPost, (req, res) => {
-  res.status(200).json(res.locals.editPost);
+router.post('/editPost', apiController.editPost, (req, res) => {
+  if(!res.locals.editedPost) {
+    res.status(500).json({message: 'Something went wrong editing your post.'});
+  } 
+  res.status(200).json(res.locals.editedPost);
 });
 
 
@@ -48,8 +58,11 @@ app.post('/editPost', apiController.editPost, (req, res) => {
 // });
 
 // Handle POST request to /createComment 
-app.post('/createComment', apiController.createComment, (req, res) => {
-  res.status(200).json(res.locals.createComment);
+router.post('/createComment', apiController.createComment, (req, res) => {
+  if(!res.locals.createdComment) {
+    res.status(500).json({message: 'Something went wrong creating your comment.'});
+  }
+  res.status(200).json(res.locals.createdComment);
 });
 
 // Handle DELETE request to /deleteComment  
