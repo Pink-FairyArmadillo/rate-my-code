@@ -241,3 +241,6 @@ apiController.createComment = (req, res, next) => {
     return next();
   })
 };
+
+
+module.exports = apiController;

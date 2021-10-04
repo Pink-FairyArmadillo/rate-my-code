@@ -5,8 +5,8 @@ const loginController = {};
 
 /*Get user specified in req.body in getUser store in res.locals.user */
 loginController.getUser = (req, res, next) => {
-  const { username } = req.body.user;
-
+  console.log('loginController.getUser: checking for user ', username);
+  const username = req.body.user;
   // Construct a DB query for username
   const query = {
     text: `
@@ -15,9 +15,9 @@ loginController.getUser = (req, res, next) => {
       WHERE username = $1
     `,
     params: [username]
-  }
+  };
   
-  // Query our DB to find username store result in res.locals.user
+  // Query our DB o find username store result in res.locals.user
   db.query(query.text, query.params, (err, dbResponse) => {
     if(err) {
       next({
@@ -40,8 +40,8 @@ loginController.verifyUser = (req, res, next) => {
     return next(); 
   } 
 
-  const { password } = req.body.user;
-
+  const password = req.body.user;
+  console.log('loginController.verifyUser: checking password for ', req.body.user);
   if(password !== res.locals.user.password) {
     delete res.locals.user;
   }
@@ -59,7 +59,7 @@ loginController.createUser = (req, res, next) => {
     delete res.locals.user;
     return next();
   }
-
+  console.log('loginController.createUser: creating user ', req.body.user);
   const { username, password } = req.body.user;
 
   const query = {
@@ -68,7 +68,7 @@ loginController.createUser = (req, res, next) => {
       VALUES ($1, $2)
     `,
     params: [username, password]
-  }
+  };
 
   db.query(query.text, query.params, (err, dbResponse) => {
     if(err) {

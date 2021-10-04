@@ -12,10 +12,12 @@ const PORT = 3000;
 
 // Insert global parsers
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 // Serve Static Files
 app.use(express.static(path.resolve(__dirname, '../dist/index.html')));
 app.use(express.static(path.resolve(__dirname, '../dist')));
+
 
 // Direct to Routers
 app.use('/login', loginRouter);
@@ -43,7 +45,7 @@ app.use((err, req, res, next) => {
     status: 500,
     message: { err: 'An error occurred' }
   };
-
+  console.log('Sending a global error to the client.');
   const errorObj = Object.assign({}, defaultErr, err);
   return res.status(errorObj.status).json(errorObj.message);
 });
