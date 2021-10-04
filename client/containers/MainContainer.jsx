@@ -1,9 +1,12 @@
 import React from 'react';
+import { Switch, Route, Link } from 'react-router-dom';
 import { ProSidebar, Menu, MenuItem } from 'react-pro-sidebar';
-import 'react-pro-sidebar/dist/css/styles.css';
-import { Link } from 'react-router-dom';
-import CreatePost from '../components/CreatePost.jsx';
+
 import Container from '@mui/material/Container';
+import 'react-pro-sidebar/dist/css/styles.css';
+
+import CreatePost from '../components/CreatePost.jsx';
+import Feed from '../components/Feed.jsx';
 import FeedCodeBlock from '../components/FeedCodeBlock.jsx';
 
 import classes from './MainContainer.module.css';
@@ -15,7 +18,10 @@ export default function MainContainer() {
       <ProSidebar className={classes.sidebar}>
         <Menu iconShape="square">
           <MenuItem>
-            <Link to="/feed">Home</Link>
+            <Link to="/home">Home</Link>
+          </MenuItem>
+          <MenuItem>
+            <Link to="/home/feed">Feed</Link>
           </MenuItem>
           <MenuItem>JavaScript</MenuItem>
           <MenuItem>Python</MenuItem>
@@ -26,6 +32,18 @@ export default function MainContainer() {
         </Menu>
       </ProSidebar>
       {/* we may need to import other components below */}
+      <Switch>
+        <Route path="/home" exact>
+          <h1>Welcome to Rate-My-Code</h1>
+        </Route>
+        <Route path="/home/createpost">
+          <CreatePost />
+        </Route>
+        <Route path="/home/feed">
+          <Feed />
+          {/* <FeedCodeBlock /> */}
+        </Route>
+      </Switch>
       {/* <main className={classes.codeBlockContainer}>
         <FeedCodeBlock />
         <FeedCodeBlock />
@@ -35,7 +53,7 @@ export default function MainContainer() {
         <FeedCodeBlock />
       </main> */}
       <div>
-        <Link to="/createpost">
+        <Link to="/home/createpost">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="32"
@@ -52,7 +70,5 @@ export default function MainContainer() {
     </Container>
   );
 }
-
-
 
 //@import '~react-pro-sidebar/dist/scss/styles.scss'; for styles.scss

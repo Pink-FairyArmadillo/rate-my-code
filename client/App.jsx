@@ -11,21 +11,14 @@ export default function App(props) {
     <div>
       <Switch>
         <Route path="/" exact>
-          {/* <MainContainer /> */}
           <LogInContainer />
         </Route>
-        <Route path="/postview"></Route>
-        <Route path="/createpost">
-          <CreatePost />
-        </Route>
-        <Route path="/feed">
-          <Feed />
-          <FeedCodeBlock /> {/* //delete when we can fetch from database */}
+        <Route path="/home">
+          <MainContainer />
         </Route>
       </Switch>
     </div>
   );
-
 }
 
 // const App = props => {
