@@ -1,4 +1,5 @@
 // TODO: import DB models
+const db = require('../models/models');
 
 const loginController = {};
 

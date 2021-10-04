@@ -2,15 +2,13 @@
 const path = require('path');
 const express = require('express');
 
-// TODO: Require Routers
+// Require Routers
 const loginRouter = require('./routes/login');
+const apiRouter = require('./routes/api');
 
 // Initialize Express Server
 const app = express();
 const PORT = 3000;
-
-// TODO: Initialize DB connection
-
 
 // Insert global parsers
 app.use(express.json());
@@ -19,16 +17,17 @@ app.use(express.json());
 app.use(express.static(path.resolve(__dirname, '../dist/index.html')));
 app.use(express.static(path.resolve(__dirname, '../dist')));
 
-// TODO: Direct to Routers
+// Direct to Routers
 app.use('/login', loginRouter);
-
+app.use('/api', apiRouter);
 
 /* Handle Client Side React-Router Routes */
 // Have an array hold our react routes as strings
-const reactRouterPaths = ['/postview', '/feed', '/createPost', '/landing'];
+const reactRouterPaths = ['/postview', '/feed', '/createpost', '/landing'];
 // Have our server(app) check for the react routes and serve our static files
 app.use(reactRouterPaths, (req, res) => {
   res.sendFile(path.resolve(__dirname, '../dist/index.html'));
+  res.sendFile(path.resolve(__dirname, '../dist'));
 });
 
 // Global 404 catch for bad route requests
