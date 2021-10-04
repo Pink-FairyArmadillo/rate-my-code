@@ -2,15 +2,13 @@
 const path = require('path');
 const express = require('express');
 
-// TODO: Require Routers
+// Require Routers
 const loginRouter = require('./routes/login');
+const apiRouter = require('./routes/api');
 
 // Initialize Express Server
 const app = express();
 const PORT = 3000;
-
-// TODO: Initialize DB connection
-const db = require('./models/models');
 
 // Insert global parsers
 app.use(express.json());
@@ -19,9 +17,9 @@ app.use(express.json());
 app.use(express.static(path.resolve(__dirname, '../dist/index.html')));
 app.use(express.static(path.resolve(__dirname, '../dist')));
 
-// TODO: Direct to Routers
+// Direct to Routers
 app.use('/login', loginRouter);
-
+app.use('/api', apiRouter);
 
 /* Handle Client Side React-Router Routes */
 // Have an array hold our react routes as strings
