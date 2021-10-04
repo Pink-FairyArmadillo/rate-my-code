@@ -1,0 +1,15 @@
+.mainContainer {
+  display: flex !important;
+  justify-content: space-between;
+}
+
+.sidebar {
+  /* background-color: white; */
+  color: black;
+}
+
+.codeBlockContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
