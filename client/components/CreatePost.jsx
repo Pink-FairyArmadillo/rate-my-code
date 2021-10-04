@@ -5,6 +5,7 @@ import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import TextField from "@mui/material/TextField";
 import { Button } from "@mui/material";
 
+
 export default function CreatePost() {
   const [newPost, setNewPost] = useState({});
   const [submitted, setSubmitted] = useState(false);
@@ -82,18 +83,18 @@ export default function CreatePost() {
   // remove MainContainer when we implement React Router
   return (
     <div>
+
       <div><HighlightOffIcon id="cancel-post"/></div>
+
       <div>
         <TextField id="title" label="Title" variant="outlined" ref={titleInputRef}/>
       </div>
-        <div>
-          {dropDownMenu}
-        </div>
+      <div>{dropDownMenu}</div>
       <div>
         <TextField id="description" label="Description" variant="outlined" ref={descriptionInputRef}/>
       </div>
       <div>
-      <TextField
+        <TextField
           id="standard-textarea"
           label="< Past Your Code Here />"
           placeholder="Hello World!"
@@ -103,7 +104,9 @@ export default function CreatePost() {
         />
       </div>
       <div>
-        <Button id="submit" variant="contained">Submit</Button>
+        <Button id="submit" variant="contained">
+          Submit
+        </Button>
       </div>
     </div>
   );

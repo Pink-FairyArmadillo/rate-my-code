@@ -4,7 +4,7 @@ const db = require('../models/models');
 const apiController = {};
 
 apiController.getTopic = (req, res, next) => {
-  const { topic } = req.body.topic; 
+  const topic = req.params.topic; 
 
   const query = {
     text: `
@@ -29,7 +29,7 @@ apiController.getTopic = (req, res, next) => {
 };
 
 apiController.getPost = (req, res, next) => {
-  const { id } = req.body.post; 
+  const id = req.params.post; 
 
   const query = {
     text: `
@@ -48,21 +48,21 @@ apiController.getPost = (req, res, next) => {
       });
     }
 
-    res.locals.getPost = [dbResponse.rows[0]];
+    res.locals.post.postContent = dbResponse.rows[0];
     return next();
   })
 };
 
 apiController.getComments = (req, res, next) => {
-  const { id } = req.body.topic;
+  const id = req.body.post;
 
   // get comments from comments table using foreign key of correct post
   const query = {
     text: `
-      SELECT * 
-      FROM comments
-      LEFT JOIN posts
-      WHERE comments.post_id = posts.$1
+      SELECT c.* 
+      FROM comments c
+      LEFT JOIN posts p
+      ON c.post_id = p.$1
     `,
     params: [id]
   };
@@ -75,7 +75,7 @@ apiController.getComments = (req, res, next) => {
       });
     }
 
-    res.locals.post.push(dbResponse.rows[0]);
+    res.locals.post.comments = dbResponse.rows[0];
     return next();
   })
 };
@@ -132,14 +132,15 @@ apiController.createPost = (req, res, next) => {
       });
     }
 
-    res.locals.createPost = dbResponse.rows[0];
+    res.locals.createdPost = dbResponse.rows[0];
     return next();
   })
 };
 
 apiController.editPost = (req, res, next) => {
+    
     const { 
-        id,
+        _id,
         topic,
         date,
         upvotes,
@@ -148,26 +149,26 @@ apiController.editPost = (req, res, next) => {
         issue,
         tried,
         cause,
-        code,
-        user_id
+        code
       } = req.body.editPost;
   
     const query = {
       text: `
         UPDATE posts
         SET 
-          topic = $1,
-          date = $2,
-          upvotes = $3,
-          downvotes = $4,
-          title = $5,
-          issue = $6,
-          tried = $7,
-          cause = $8,
-          code = $9,
-        WHERE id = $10
+          topic = $2,
+          date = $3,
+          upvotes = $4,
+          downvotes = $5,
+          title = $6,
+          issue = $7,
+          tried = $8,
+          cause = $9,
+          code = $10,
+        WHERE _id = $1
       `,
       params: [
+        _id,
         topic,
         date,
         upvotes,
@@ -176,8 +177,7 @@ apiController.editPost = (req, res, next) => {
         issue,
         tried,
         cause,
-        code,
-        id
+        code
       ]
     }
   
@@ -189,13 +189,9 @@ apiController.editPost = (req, res, next) => {
         });
       }
 
-      res.locals.editPost = dbResponse.rows[0];
+      res.locals.editedPost = dbResponse.rows[0];
       return next();
     })
-};
-
-apiController.getVotes = (req, res, next) => {
- //
 };
 
 apiController.createComment = (req, res, next) => {
@@ -241,7 +237,7 @@ apiController.createComment = (req, res, next) => {
       });
     }
 
-    res.locals.createComment = dbResponse.rows[0];
+    res.locals.createdComment = dbResponse.rows[0];
     return next();
   })
 };
