@@ -71,7 +71,7 @@ export default function LogInContainer() {
     return (
       <Redirect
         to={{
-          pathname: '/feed',
+          pathname: '/home',
         }}
       />
     );
@@ -83,11 +83,7 @@ export default function LogInContainer() {
         {/* temp bar to delete after development */}
         <header>
           TEMP NAV BAR: <br />
-          <Link to="/feed">Feed</Link>
-          <br />
-          <Link to="/postview">Post View</Link>
-          <br />
-          <Link to="/createpost">Create Post</Link>
+          <Link to="/home">Home</Link>
         </header>
         <h1>Rate-My-Code</h1>
         <form>

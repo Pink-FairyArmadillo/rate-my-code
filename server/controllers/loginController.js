@@ -1,4 +1,5 @@
 // TODO: import DB models
+const db = require('../models/models');
 
 const loginController = {};
 
@@ -80,5 +81,19 @@ loginController.createUser = (req, res, next) => {
     return next();
   });
 };
+
+loginController.setCookie = (req, res, next) => {
+  if(!res.locals.user) return next();
+
+  // Get user's _id primary key and save in a variable
+  const userID = res.locals.user._id;
+
+  // Set a cookie equal to the user's _id primary key
+  res.cookie('userID', userID);
+
+  // Move on
+  return next();
+};
+
 
 module.exports = loginController;
