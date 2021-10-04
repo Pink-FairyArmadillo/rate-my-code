@@ -21,6 +21,7 @@ export default function LogInContainer() {
       password: enteredPassword,
     };
 
+    console.log('About to fetch in loginContainer:', user);
     // make fetch request to check login data
     fetch('/login', {
       method: 'POST',

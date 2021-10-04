@@ -23,7 +23,7 @@ app.use('/api', apiRouter);
 
 /* Handle Client Side React-Router Routes */
 // Have an array hold our react routes as strings
-const reactRouterPaths = ['/postview', '/feed', '/createpost', '/landing'];
+const reactRouterPaths = ['/postview', '/feed', '/createpost', '/landing', '/home'];
 // Have our server(app) check for the react routes and serve our static files
 app.use(reactRouterPaths, (req, res) => {
   res.sendFile(path.resolve(__dirname, '../dist/index.html'));

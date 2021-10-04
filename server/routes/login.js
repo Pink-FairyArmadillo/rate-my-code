@@ -25,7 +25,7 @@ router.post('/createUser',
   if(!res.locals.user) {
     res.status(400).json({message: 'Could not create user'});
   }
-  res.status(200).redirect('/feed');
+  res.status(200).redirect('/home');
 });
 
 // Handle request to / for loging in a user
