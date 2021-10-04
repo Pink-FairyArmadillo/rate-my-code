@@ -1,9 +1,9 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import MainContainer from "../containers/MainContainer.jsx";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import MainContainer from '../containers/MainContainer.jsx';
 import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
-import TextField from "@mui/material/TextField";
-import { Button } from "@mui/material";
+import TextField from '@mui/material/TextField';
+import { Button } from '@mui/material';
 
 export default function CreatePost() {
   // need title component
@@ -25,19 +25,19 @@ export default function CreatePost() {
 
   return (
     <div>
-      <MainContainer />
-      <div><DeleteOutlinedIcon /></div>
+      {/* <MainContainer /> */}
+      <div>
+        <DeleteOutlinedIcon />
+      </div>
       <div>
         <TextField id="title" label="Title" variant="outlined" />
       </div>
-        <div>
-          {dropDownMenu}
-        </div>
+      <div>{dropDownMenu}</div>
       <div>
         <TextField id="description" label="Description" variant="outlined" />
       </div>
       <div>
-      <TextField
+        <TextField
           id="standard-textarea"
           label="< Past Your Code Here />"
           placeholder="Hello World!"
@@ -46,7 +46,9 @@ export default function CreatePost() {
         />
       </div>
       <div>
-        <Button id="submit" variant="contained">Submit</Button>
+        <Button id="submit" variant="contained">
+          Submit
+        </Button>
       </div>
     </div>
   );

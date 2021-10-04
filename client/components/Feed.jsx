@@ -23,7 +23,8 @@ export default function Feed() {
   // returns code block cards
   return (
     <div>
-      <MainContainer />
+      {/* <MainContainer /> */}
+      <FeedCodeBlock />
       <div>{codeBlockEl}</div>
     </div>
   );
