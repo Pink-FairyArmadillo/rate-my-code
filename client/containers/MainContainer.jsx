@@ -13,12 +13,10 @@ import classes from './MainContainer.module.css';
 import './custom.scss';
 
 export default function MainContainer() {
-
-  const [topic, setTopic] = useState('Java');
+  //const [topic, setTopic] = useState('Java');
 
   return (
     <Container className={classes.mainContainer}>
-
       <ProSidebar className={classes.sidebar}>
         <Menu iconShape="square">
           <MenuItem>
@@ -27,12 +25,24 @@ export default function MainContainer() {
           <MenuItem>
             <Link to="/home/feed">Feed</Link>
           </MenuItem>
-          <MenuItem><Link to="/home/JavaScript">JavaScript</Link></MenuItem>
-          <MenuItem><Link to="/home/Python">Python</Link></MenuItem>
-          <MenuItem><Link to="/home/C#">C#</Link></MenuItem>
-          <MenuItem><Link to="/home/C++">C++</Link></MenuItem>
-          <MenuItem><Link to="/home/Java">Java</Link></MenuItem>
-          <MenuItem><Link to="/home/PHP">PHP</Link></MenuItem>
+          <MenuItem>
+            <Link to="/home/JavaScript">JavaScript</Link>
+          </MenuItem>
+          <MenuItem>
+            <Link to="/home/Python">Python</Link>
+          </MenuItem>
+          <MenuItem>
+            <Link to="/home/C#">C#</Link>
+          </MenuItem>
+          <MenuItem>
+            <Link to="/home/C++">C++</Link>
+          </MenuItem>
+          <MenuItem>
+            <Link to="/home/Java">Java</Link>
+          </MenuItem>
+          <MenuItem>
+            <Link to="/home/PHP">PHP</Link>
+          </MenuItem>
         </Menu>
       </ProSidebar>
 
@@ -45,11 +55,11 @@ export default function MainContainer() {
           <CreatePost />
         </Route>
         <Route path="/home/feed">
-          <Feed topic={topic} />
+          <Feed />
           {/* <FeedCodeBlock /> */}
         </Route>
       </Switch>
-      
+
       {/* <main className={classes.codeBlockContainer}>
         <FeedCodeBlock />
         <FeedCodeBlock />

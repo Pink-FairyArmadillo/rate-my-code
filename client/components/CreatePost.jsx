@@ -1,10 +1,16 @@
 import React, { useState } from 'react';
 import { Redirect, useHistory } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import { render } from 'react-dom';
 import MainContainer from '../containers/MainContainer.jsx';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import TextField from '@mui/material/TextField';
 import { Button, Select, MenuItem, InputLabel } from '@mui/material';
+import AceEditor from 'react-ace';
+
+import 'ace-builds/src-noconflict/theme-monokai';
+import 'ace-builds/src-noconflict/mode-javascript';
+import 'ace-builds/src-noconflict/ext-language_tools';
 
 export default function CreatePost() {
   const [state, setState] = useState({
@@ -17,11 +23,19 @@ export default function CreatePost() {
   });
 
   function handleChange(event) {
-    console.log(event.target);
+    console.log('change: ', event);
 
     setState({
       ...state,
       [event.target.name]: event.target.value,
+    });
+  }
+
+  function handleCodeChange(newCode) {
+    console.log('handing code change: ', newCode);
+    setState({
+      ...state,
+      code: newCode,
     });
   }
 
@@ -32,6 +46,8 @@ export default function CreatePost() {
       upvotes: 0,
       downvotes: 0,
     };
+
+    console.log('state: ', createdPost);
 
     // create fetch request to POST the new post
     fetch('/api/createPost', {
@@ -122,7 +138,7 @@ export default function CreatePost() {
         onChange={handleChange}
       />
 
-      <TextField
+      {/* <TextField
         id="code"
         name="code"
         value={state.code}
@@ -131,7 +147,22 @@ export default function CreatePost() {
         multiline
         variant="filled"
         onChange={handleChange}
-      />
+      /> */}
+
+      <AceEditor
+        mode="javascript"
+        editorProps={{ $blockScrolling: true }}
+        setOptions={{
+          enableBasicAutocompletion: true,
+          enableLiveAutocompletion: true,
+          enableSnippets: true,
+        }}
+        theme="monokai"
+        name="code"
+        defaultValue="console.log('hello everyone')"
+        value={state.code}
+        onChange={handleCodeChange}
+      ></AceEditor>
 
       <Button id="submit" variant="contained" onClick={submitCode}>
         Submit
