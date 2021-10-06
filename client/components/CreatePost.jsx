@@ -86,69 +86,68 @@ export default function CreatePost() {
   // remove MainContainer when we implement React Router
   return (
     <div>
-
       <form>
-          <div>
-            <label htmlFor="title">Title </label>
-            <input
-              type="text"
-              required
-              id="title"
-              ref={titleInputRef}
-            ></input>
-          </div>
-          <div>
-            <label htmlFor="topic">Topic </label>
-            <input
-              type="text"
-              required
-              id="topic"
-              ref={topicInputRef}
-            ></input>
-          </div>
-          <div>
-            <label htmlFor="issue">Issue </label>
-            <input
-              type="text"
-              required
-              id="issue"
-              ref={issueInputRef}
-            ></input>
-          </div>
-          <div>
-            <label htmlFor="tried">Tried </label>
-            <input
-              type="text"
-              required
-              id="tried"
-              ref={triedInputRef}
-            ></input>
-          </div>
-          <div>
-            <label htmlFor="cause">Cause </label>
-            <input
-              type="text"
-              required
-              id="cause"
-              ref={causeInputRef}
-            ></input>
-          </div>
-          <div>
-            <label htmlFor="code">Code </label>
-            <input
-              type="text"
-              required
-              id="code"
-              ref={codeInputRef}
-            ></input>
-          </div>
-          <div>
-            <Button variant="contained" onClick={submitCode}>
-              Submit
-            </Button>
-          </div>
-   
-        </form>
+        <div>
+          <label htmlFor="title">Title </label>
+          <input
+            type="text"
+            required
+            id="title"
+            ref={titleInputRef}
+          ></input>
+        </div>
+        <div>
+          <label htmlFor="topic">Topic </label>
+          <input
+            type="text"
+            required
+            id="topic"
+            ref={topicInputRef}
+          ></input>
+        </div>
+        <div>
+          <label htmlFor="issue">Issue </label>
+          <input
+            type="text"
+            required
+            id="issue"
+            ref={issueInputRef}
+          ></input>
+        </div>
+        <div>
+          <label htmlFor="tried">Tried </label>
+          <input
+            type="text"
+            required
+            id="tried"
+            ref={triedInputRef}
+          ></input>
+        </div>
+        <div>
+          <label htmlFor="cause">Cause </label>
+          <input
+            type="text"
+            required
+            id="cause"
+            ref={causeInputRef}
+          ></input>
+        </div>
+        <div>
+          <label htmlFor="code">Code </label>
+          <input
+            type="text"
+            required
+            id="code"
+            ref={codeInputRef}
+          ></input>
+        </div>
+        <div>
+          <Button variant="contained" onClick={submitCode}>
+            Submit
+          </Button>
+        </div>
+  
+      </form>
 
       {/* <div><HighlightOffIcon id="cancel-post"/></div>
 
