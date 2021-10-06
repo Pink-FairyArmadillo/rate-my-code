@@ -20,7 +20,7 @@ function Feed(props) {
 
   // update state that we fetch
   useEffect(() => {
-    fetch(`/api/getTopic/${props.topic}`)
+    fetch(`/api/getAll`)
       .then((res) => res.json())
       .then((data) => {
         props.loadAllCodeBlocks(data);
