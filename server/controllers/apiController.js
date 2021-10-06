@@ -47,6 +47,7 @@ apiController.getPost = (req, res, next) => {
         message: { err: err.message }
       });
     }
+    console.log(dbResponse)
 
     res.locals.post.postContent = dbResponse.rows[0];
     return next();
@@ -97,7 +98,7 @@ apiController.getComments = (req, res, next) => {
 */
 apiController.createPost = (req, res, next) => {
   console.log('About to create a post'); 
-  const user_id = req.cookies.userID;
+  const user_id = 1; //req.cookies.userID;
   const { 
     topic,
     // date,
@@ -123,7 +124,8 @@ apiController.createPost = (req, res, next) => {
         code,
         user_id
       )
-      VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9);
+      VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
+      RETURNING *;
     `,
     params: [
       topic,
@@ -146,7 +148,7 @@ apiController.createPost = (req, res, next) => {
         message: { err: err.message }
       });
     }
-    res.locals.createdPost = true;
+    res.locals.createdPost = dbResponse.rows[0];
     return next();
   });
 };

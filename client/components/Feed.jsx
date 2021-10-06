@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 // import ReactDOM from 'react-dom';
-import MainContainer from '../containers/MainContainer.jsx';
 import FeedCodeBlock from './FeedCodeBlock.jsx';
 
 export default function Feed(props) {

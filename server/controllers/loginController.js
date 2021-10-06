@@ -4,8 +4,9 @@ const db = require('../models/models');
 const loginController = {};
 
 /*Get user specified in req.body in getUser store in res.locals.user */
-loginController.getUser = (req, res, next) => {
+loginController.getUser = async (req, res, next) => {
   const { username } = req.body;
+  console.log(username);
   // Construct a DB query for username
   const query = {
     text: `
@@ -27,6 +28,8 @@ loginController.getUser = (req, res, next) => {
     if(dbResponse.rows[0])  res.locals.user = dbResponse.rows[0];
     return next();
   });
+
+
 };
 
 /*
@@ -67,7 +70,8 @@ loginController.createUser = (req, res, next) => {
     `,
     params: [username, password]
   };
-
+  
+  
   db.query(query.text, query.params, (err, dbResponse) => {
     if(err) {
       next({
@@ -75,6 +79,7 @@ loginController.createUser = (req, res, next) => {
         message: { err: err.message }
       });
     }
+    console.log(dbResponse);
     res.locals.user = dbResponse.rows[0];
     return next();
   });

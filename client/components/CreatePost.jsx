@@ -41,13 +41,13 @@ export default function CreatePost() {
     fetch('/api/createPost', {
       method: 'POST',
       headers: {
-        'Content-type': 'application/json' //not sure about what needs to go here
+        'Content-type': 'application/json',
+        'Accept': 'application/json'
       },
       body: JSON.stringify(createdPost)
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         if (data) {
           setNewPost(data);
           setSubmitted(true);
