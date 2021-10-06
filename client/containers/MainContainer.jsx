@@ -18,6 +18,7 @@ export default function MainContainer() {
 
   return (
     <Container className={classes.mainContainer}>
+
       <ProSidebar className={classes.sidebar}>
         <Menu iconShape="square">
           <MenuItem>
@@ -34,6 +35,7 @@ export default function MainContainer() {
           <MenuItem><Link to="/home/PHP">PHP</Link></MenuItem>
         </Menu>
       </ProSidebar>
+
       {/* we may need to import other components below */}
       <Switch>
         <Route path="/home" exact>
@@ -47,6 +49,7 @@ export default function MainContainer() {
           {/* <FeedCodeBlock /> */}
         </Route>
       </Switch>
+      
       {/* <main className={classes.codeBlockContainer}>
         <FeedCodeBlock />
         <FeedCodeBlock />
@@ -55,6 +58,7 @@ export default function MainContainer() {
         <FeedCodeBlock />
         <FeedCodeBlock />
       </main> */}
+
       <div>
         <Link to="/home/createpost">
           <svg
