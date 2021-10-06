@@ -24,12 +24,14 @@ const postsReducer = (state = initialState, action) => {
     codeBlocks.push(JSON.parse(JSON.stringify(codeBlock)));
   });
 
-  switch (action.type ) {
-    // add new post and return new state
-    case types.ADD_CODEBLOCKS: {
+  switch (action.type) {
+    // load all codeblocks for initial render
+    case types.LOAD_ALL_CODEBLOCKS: {
     
-      
-      break;
+      return {
+        ...state,
+        codeBlocks: action.payload,
+      };
 
     }
 
