@@ -8,7 +8,7 @@ export default function Feed(props) {
   const [codeBlocks, setCodeBlocks] = useState([]);
 
   // update state that we fetch
-  fetch(`/api/getTopic/${props.topic}`)
+  fetch('/api/getAll')
     .then((res) => res.json())
     .then((data) => {
       setCodeBlocks(data);
