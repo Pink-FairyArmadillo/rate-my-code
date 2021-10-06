@@ -7,7 +7,6 @@ import 'react-pro-sidebar/dist/css/styles.css';
 
 import CreatePost from '../components/CreatePost.jsx';
 import Feed from '../components/Feed.jsx';
-import FeedCodeBlock from '../components/FeedCodeBlock.jsx';
 
 import classes from './MainContainer.module.css';
 import './custom.scss';
@@ -23,9 +22,6 @@ export default function MainContainer() {
           <MenuItem>
             <Link to="/home">Home</Link>
           </MenuItem>
-          <MenuItem>
-            <Link to="/home/feed">Feed</Link>
-          </MenuItem>
           <MenuItem><Link to="/home/JavaScript">JavaScript</Link></MenuItem>
           <MenuItem><Link to="/home/Python">Python</Link></MenuItem>
           <MenuItem><Link to="/home/C#">C#</Link></MenuItem>
@@ -38,13 +34,10 @@ export default function MainContainer() {
       <Switch>
         <Route path="/home" exact>
           <h1>Welcome to Rate-My-Code</h1>
+          <Feed topic={topic} />
         </Route>
         <Route path="/home/createpost">
           <CreatePost />
-        </Route>
-        <Route path="/home/feed">
-          <Feed topic={topic} />
-          {/* <FeedCodeBlock /> */}
         </Route>
       </Switch>
       {/* <main className={classes.codeBlockContainer}>

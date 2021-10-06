@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 import classes from './FeedCodeBlock.module.css';
 
-export default function Feed(props) {
+export default function FeedCodeBlock(props) {
   return (
     <section>
       {/* update the link to /postview/${props.info.id} to get the post id from props and redirect there */}

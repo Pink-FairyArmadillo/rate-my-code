@@ -1,7 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { Redirect, useHistory } from 'react-router-dom';
 import { Link } from "react-router-dom";
-import MainContainer from "../containers/MainContainer.jsx";
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import TextField from "@mui/material/TextField";
 import { Button } from "@mui/material";
@@ -17,6 +16,7 @@ export default function CreatePost() {
   const triedInputRef = useRef();
   const causeInputRef = useRef();
   const codeInputRef = useRef();
+  // const InputRef = useRef({title, topic, issue, triedInput, });
 
   function submitCode () {
     const enteredTitle = titleInputRef.current.value;

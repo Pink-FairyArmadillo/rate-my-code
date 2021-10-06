@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 // import ReactDOM from 'react-dom';
-import MainContainer from '../containers/MainContainer.jsx';
 import FeedCodeBlock from './FeedCodeBlock.jsx';
 
-export default function Feed() {
+export default function PostView() {
   // have 2 useState hooks
   // make 2 fetch requests
     // 1 - to get post
