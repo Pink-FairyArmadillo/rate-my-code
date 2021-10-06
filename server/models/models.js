@@ -1,5 +1,6 @@
 const { Pool } = require('pg');
 
+// new link to Conrad's database
 const PG_URI = 'postgres://dtfhwazu:cp4pNgbFI7QZny167oms8WPl5PTyabsh@chunee.db.elephantsql.com/dtfhwazu';
 
 const pool = new Pool({
@@ -10,5 +11,6 @@ module.exports = {
   query: (text, params, callback) => {
     console.log('executed query', text);
     return pool.query(text, params, callback);
+
   }
 };
