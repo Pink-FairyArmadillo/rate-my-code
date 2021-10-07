@@ -15,11 +15,19 @@ import './custom.scss';
 export default function MainContainer() {
   //const [topic, setTopic] = useState('Java');
 
-  const languages = ['', 'Javascript', 'Python', 'C#', 'C++', 'Java', 'PHP'];
+  const languages = {
+    '': 'Feed',
+    Javascript: 'JavaScript',
+    Python: 'Python',
+    'C-sharp': 'C#',
+    'C-plus-plus': 'C++',
+    Java: 'Java',
+    PHP: 'PHP',
+  };
 
-  const menuItems = languages.map((lang) => (
-    <MenuItem key={lang}>
-      <Link to={`/home/feed/${lang}`}>{lang || 'Feed'}</Link>
+  const menuItems = Object.entries(languages).map(([url, navLabel]) => (
+    <MenuItem key={navLabel}>
+      <Link to={`/home/feed/${url}`}>{navLabel}</Link>
     </MenuItem>
   ));
 

@@ -95,12 +95,12 @@ export default function CreatePost() {
         margin="normal"
         onChange={handleChange}
       >
-        <MenuItem value="javascript">JavaScript</MenuItem>
-        <MenuItem value="python">Python</MenuItem>
-        <MenuItem value="c-sharp">C#</MenuItem>
-        <MenuItem value="c-plus-plus">C++</MenuItem>
-        <MenuItem value="java">Java</MenuItem>
-        <MenuItem value="php">PHP</MenuItem>
+        <MenuItem value="Javascript">JavaScript</MenuItem>
+        <MenuItem value="Python">Python</MenuItem>
+        <MenuItem value="C-sharp">C#</MenuItem>
+        <MenuItem value="C-plus-plus">C++</MenuItem>
+        <MenuItem value="Java">Java</MenuItem>
+        <MenuItem value="PHP">PHP</MenuItem>
       </Select>
 
       <TextField

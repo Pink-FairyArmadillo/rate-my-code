@@ -30,7 +30,7 @@ function Feed(props) {
         props.loadAllCodeBlocks(data);
       })
       .catch((err) => console.log(err));
-  }, []);
+  }, [lang]);
 
   // create codeblock components and save them in an array
   const codeBlocks = props.codeBlocks.map((post) => {
