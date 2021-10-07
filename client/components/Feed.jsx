@@ -33,14 +33,7 @@ function Feed(props) {
     return <FeedCodeBlock key={post._id} code={post.code} />;
   });
 
-  // mocking up data pending backend fixes
-  // const codeBlockEl = [];
-  // codeBlockEl.push(<FeedCodeBlock key={2} code={"console.log('b')"} />);
-  // codeBlockEl.push(<FeedCodeBlock key={3} code={"console.log('c')"} />);
-
-  console.log(props.codeBlocks);
-
-  // returns code block cards
+  console.log(props.match.params.params1);
   return <div>{codeBlocks}</div>;
 }
 
