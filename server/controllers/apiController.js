@@ -9,7 +9,8 @@ apiController.getAll = (req, res, next) => {
   const query = {
     text: `
       SELECT *
-      FROM posts;`,
+      FROM posts
+      ORDER BY _id DESC;`,
     params: []
   };
 
@@ -86,8 +87,8 @@ apiController.getComments = (req, res, next) => {
     text: `
     SELECT *
     FROM comments
-    WHERE post_id = $1;
-    `,
+    WHERE post_id = $1
+    ORDER BY _id DESC;`,
     params: [id]
   };
 
@@ -234,15 +235,15 @@ apiController.editPost = (req, res, next) => {
 
 apiController.createComment = (req, res, next) => {
   const user_id = req.headers.cookie;
-  
+  console.log('Request Body:', req.body)
   const { 
     comment,
     code,
     upvotes,
     downvotes,
     date,
-    post_id
-  } = req.body.createComment;
+    post_id,
+  } = req.body;
   
   const query = {
     text: `
@@ -255,8 +256,7 @@ apiController.createComment = (req, res, next) => {
         post_id,
         user_id
       )
-      VALUES ($1, $2, $3, $4, $5, $6, $7)
-      RETURNING *;
+      VALUES ($1, $2, $3, $4, $5, $6, $7);
     `,
     params: [
       comment,
@@ -271,13 +271,14 @@ apiController.createComment = (req, res, next) => {
 
   db.query(query.text, query.params, (err, dbResponse) => {
     if(err) {
+      console.log('DB ERROR: ', err);
       next({
         log: 'ERROR: apiController.createComment',
         message: { err: err.message }
       });
     }
-
-    res.locals.createdComment = dbResponse.rows[0];
+    console.log('dbResponse: ', dbResponse);
+    //res.locals.createdComment = dbResponse.rows[0];
     return next();
   });
 };
