@@ -5,7 +5,6 @@ import MainContainer from '../containers/MainContainer.jsx';
 import FeedCodeBlock from './FeedCodeBlock.jsx';
 import * as actions from '../actions/actions';
 import AceEditor from 'react-ace';
-import classes from './Feed.module.css';
 
 import 'ace-builds/src-noconflict/theme-monokai';
 import 'ace-builds/src-noconflict/mode-javascript';

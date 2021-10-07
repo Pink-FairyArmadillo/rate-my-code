@@ -4,12 +4,13 @@ import { useParams } from 'react-router-dom';
 import MainContainer from '../containers/MainContainer.jsx';
 import FeedCodeBlock from './FeedCodeBlock.jsx';
 
+import TextField from '@mui/material/TextField';
+import { Button, FormControl } from '@mui/material';
+
 import AceEditor from 'react-ace';
 import 'ace-builds/src-noconflict/theme-monokai';
 import 'ace-builds/src-noconflict/mode-javascript';
 import 'ace-builds/src-noconflict/ext-language_tools';
-
-import TextField from '@mui/material/TextField';
 
 export default function Post(props) {
   const { postID } = useParams();
@@ -31,20 +32,23 @@ export default function Post(props) {
   const [comment, setComment] = useState({
     comment: '',
     code: '',
-    upvotes: null,
-    downvotes: null,
-    date: null,
-    post_id: null,
+    upvotes: 0,
+    downvotes: 0,
+    date: 0,
+    post_id: postID,
   });
 
-  useEffect(() => {
+  useEffect(() => getPosts(), []);
+
+  function getPosts() {
     fetch(`/api/getPost/${postID}`)
       .then((res) => res.json())
       .then((data) => {
+        console.log(data);
         setState(data);
       })
       .catch((err) => console.log(err));
-  }, []);
+  }
 
   function handleChange(event) {
     setComment({
@@ -53,26 +57,32 @@ export default function Post(props) {
     });
   }
 
-  // function handleClick() {
-  //   fetch('/api/createComment',
-  //     {
-  //       method: 'POST',
-  //       headers: {
-  //         'Content-Type' : 'application/json',
-  //       },
-  //       body: JSON.stringify(comment);
-  //     })
-  //     .then(data => )
-  // }
+  function handleClick() {
+    fetch('/api/createComment/', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(comment),
+    })
+      .then((res) => {
+        if (res.status === 200) {
+          setComment({ ...comment, comment: '' });
+          getPosts();
+        }
+      })
+      .catch((err) => console.log(err));
+  }
 
   const comments = state.postComments.map((obj, i) => (
     <div key={`comment${i}`} className="comment">
-      <h4 style={{ textAlign: 'left' }}>{obj.user_id}</h4>
+      <h4 style={{ textAlign: 'left' }}>{obj.username}</h4>
       <p>{obj.comment}</p>
     </div>
   ));
+
   return (
-    <div>
+    <div id="postView">
       <AceEditor
         mode="javascript"
         editorProps={{ $blockScrolling: true }}
@@ -89,18 +99,21 @@ export default function Post(props) {
         width="35vw"
       ></AceEditor>
 
-      <TextField
-        name="comment"
-        value={state.comment}
-        label="Title"
-        variant="outlined"
-        margin="normal"
-        onChange={handleChange}
-      />
+      <FormControl margin="normal" id="commentForm">
+        <TextField
+          name="comment"
+          value={comment.comment}
+          label="Post a comment.."
+          variant="outlined"
+          margin="normal"
+          onChange={handleChange}
+          width="200px"
+        />
 
-      <Button id="submit" variant="contained" onClick={submitCode}>
-        Post Comment
-      </Button>
+        <Button id="submit" variant="contained" onClick={handleClick}>
+          Post Comment
+        </Button>
+      </FormControl>
 
       <div id="comments">{comments}</div>
     </div>

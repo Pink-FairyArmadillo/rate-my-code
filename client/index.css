@@ -10,3 +10,11 @@ body,
 .post {
   margin-bottom: 70px;
 }
+
+#commentForm {
+  width: 100%;
+}
+
+#main {
+  display: flex;
+}
