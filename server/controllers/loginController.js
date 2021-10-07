@@ -57,7 +57,16 @@ loginController.createUser = (req, res, next) => {
     delete res.locals.user;
     return next();
   }
+
   const { username, password } = req.body;
+  // Check if a username and password have been entered. 
+  if (username.length < 3 || password.length < 5) {
+    return next({  
+      log: 'Invalid user name or password',
+      message: {err: err.message}
+    })
+  }
+
 
   const query = {
     text: `

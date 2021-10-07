@@ -1,4 +1,4 @@
-const db = require('../models/models.js');
+const db = require('../server/models/models');
 const path = require('path');
 const supertest = require('supertest');
 
@@ -28,11 +28,28 @@ describe('db unit tests', () => {
 
 //Test whether addUser adds a valid user and returns error if invalid
 describe('addUser'), () => {
-  it('adds valid user to db', () => {
-    const query = `
+  it('adds user to db without error', () => {
+    
+    const testArr = ['usertest', 'passwdtest'];
+    
+    const query = {
+      text: `
     INSERT INTO users
-   `
+    VALUES ($1, $2);
+     `,
+      params: testArr
+    };
 
+   const result = db.query(query.text, query.params);
+   expect(result).not.toBeInstanceOf(Error);
+   console.log('result: ', result);
+
+  
+   //const userQuery = `SELECT * FROM users;`
+
+  
+
+   expect
 
   })
 }
