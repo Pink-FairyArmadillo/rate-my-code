@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
-// import ReactDOM from 'react-dom';
+import { useParams } from 'react-router-dom';
 import MainContainer from '../containers/MainContainer.jsx';
 import FeedCodeBlock from './FeedCodeBlock.jsx';
 import * as actions from '../actions/actions';
@@ -19,8 +19,12 @@ function Feed(props) {
   // const [codeBlocks, setCodeBlocks] = useState([]);
 
   // update state that we fetch
+
+  const { lang } = useParams();
+
   useEffect(() => {
-    fetch(`/api/getAll`)
+    const url = lang ? `/api/getTopic/${lang}` : '/api/getAll';
+    fetch(url)
       .then((res) => res.json())
       .then((data) => {
         props.loadAllCodeBlocks(data);
@@ -33,7 +37,6 @@ function Feed(props) {
     return <FeedCodeBlock key={post._id} code={post.code} />;
   });
 
-  console.log(props.match.params.params1);
   return <div>{codeBlocks}</div>;
 }
 

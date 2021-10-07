@@ -15,11 +15,11 @@ import './custom.scss';
 export default function MainContainer() {
   //const [topic, setTopic] = useState('Java');
 
-  const languages = ['Javascript', 'Python', 'C#', 'C++', 'Java', 'PHP'];
+  const languages = ['', 'Javascript', 'Python', 'C#', 'C++', 'Java', 'PHP'];
 
   const menuItems = languages.map((lang) => (
     <MenuItem key={lang}>
-      <Link to={`/home/feed/${lang}`}>{lang}</Link>
+      <Link to={`/home/feed/${lang}`}>{lang || 'Feed'}</Link>
     </MenuItem>
   ));
 
@@ -37,20 +37,10 @@ export default function MainContainer() {
         <Route path="/home/createpost">
           <CreatePost />
         </Route>
-        <Route path="/home/feed/:lang">
+        <Route path="/home/feed/:lang?">
           <Feed />
-          {/* <FeedCodeBlock /> */}
         </Route>
       </Switch>
-
-      {/* <main className={classes.codeBlockContainer}>
-        <FeedCodeBlock />
-        <FeedCodeBlock />
-        <FeedCodeBlock />
-        <FeedCodeBlock />
-        <FeedCodeBlock />
-        <FeedCodeBlock />
-      </main> */}
 
       <div>
         <Link to="/home/createpost">
@@ -70,5 +60,3 @@ export default function MainContainer() {
     </Container>
   );
 }
-
-//@import '~react-pro-sidebar/dist/scss/styles.scss'; for styles.scss
