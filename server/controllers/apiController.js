@@ -42,7 +42,7 @@ apiController.getTopic = (req, res, next) => {
 
   db.query(query.text, query.params, (err, dbResponse) => {
     if(err) {
-      next({
+      return next({
         log: 'ERROR: apiController.getTopic',
         message: { err: err.message }
       });
