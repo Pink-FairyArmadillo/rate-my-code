@@ -32,6 +32,7 @@ const reactRouterPaths = [
   '/landing',
   '/home',
 ];
+
 // Have our server(app) check for the react routes and serve our static files
 app.use(reactRouterPaths, (req, res) => {
   res.sendFile(path.resolve(__dirname, '../dist/index.html'));

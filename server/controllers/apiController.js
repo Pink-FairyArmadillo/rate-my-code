@@ -105,21 +105,6 @@ apiController.getComments = (req, res, next) => {
   });
 };
 
-/*
-  const createdPost = {
-      topic: enteredTopic,
-      date: Date.now(),
-      upvotes: 0,
-      downvotes: 0,
-      title: enteredTitle,
-      issue: enteredIssue,
-      tried: enteredTried,
-      cause: enteredCause,
-      // description: enteredDescription,
-      code: enteredCode,
-      userId: null, // use cookie data to input user ID
-    };
-*/
 apiController.createPost = (req, res, next) => {
   console.log('About to create a post'); 
   const user_id = req.cookies.userID;
@@ -277,8 +262,7 @@ apiController.createComment = (req, res, next) => {
         message: { err: err.message }
       });
     }
-    console.log('dbResponse: ', dbResponse);
-    //res.locals.createdComment = dbResponse.rows[0];
+    
     return next();
   });
 };
