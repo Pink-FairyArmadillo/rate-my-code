@@ -4,6 +4,11 @@ import { useParams } from 'react-router-dom';
 import MainContainer from '../containers/MainContainer.jsx';
 import FeedCodeBlock from './FeedCodeBlock.jsx';
 import * as actions from '../actions/actions';
+import AceEditor from 'react-ace';
+
+import 'ace-builds/src-noconflict/theme-monokai';
+import 'ace-builds/src-noconflict/mode-javascript';
+import 'ace-builds/src-noconflict/ext-language_tools';
 
 const mapDispatchToProps = (dispatch) => ({
   loadAllCodeBlocks: (codeBlocks) =>
@@ -33,8 +38,23 @@ function Feed(props) {
   }, [lang]);
 
   // create codeblock components and save them in an array
-  const codeBlocks = props.codeBlocks.map((post) => {
-    return <FeedCodeBlock key={post._id} code={post.code} />;
+  const codeBlocks = props.codeBlocks.map((post, index) => {
+    return (
+      <AceEditor
+        key={index}
+        mode="javascript"
+        editorProps={{ $blockScrolling: true }}
+        setOptions={{
+          enableBasicAutocompletion: true,
+          enableLiveAutocompletion: true,
+          enableSnippets: true,
+        }}
+        theme="monokai"
+        name="code"
+        defaultValue={post.code}
+        readOnly={true}
+      ></AceEditor>
+    );
   });
 
   return <div>{codeBlocks}</div>;
