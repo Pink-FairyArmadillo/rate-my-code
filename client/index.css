@@ -6,3 +6,7 @@ body,
   height: 100%;
   font-family: 'Roboto', sans-serif;
 }
+
+.post {
+  margin-bottom: 70px;
+}

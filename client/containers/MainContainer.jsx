@@ -8,6 +8,7 @@ import 'react-pro-sidebar/dist/css/styles.css';
 import CreatePost from '../components/CreatePost.jsx';
 import Feed from '../components/Feed.jsx';
 import FeedCodeBlock from '../components/FeedCodeBlock.jsx';
+import Post from '../components/Post.jsx';
 
 import classes from './MainContainer.module.css';
 import './custom.scss';
@@ -33,9 +34,11 @@ export default function MainContainer() {
 
   return (
     <Container className={classes.mainContainer}>
-      <ProSidebar className={classes.sidebar}>
-        <Menu iconShape="square">{menuItems}</Menu>
-      </ProSidebar>
+      <div className="sidebar">
+        <ProSidebar>
+          <Menu iconShape="square">{menuItems}</Menu>
+        </ProSidebar>
+      </div>
 
       {/* we may need to import other components below */}
       <Switch>
@@ -47,6 +50,9 @@ export default function MainContainer() {
         </Route>
         <Route path="/home/feed/:lang?">
           <Feed />
+        </Route>
+        <Route path="/home/post/:postID?">
+          <Post />
         </Route>
       </Switch>
 
